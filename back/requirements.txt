@@ -1,1 +1,11 @@
-requirements.txt
+Django==1.11.1
+
+# https://github.com/kennethreitz/dj-database-url
+#
+dj-database-url==0.4.2
+
+# web server
+gunicorn==19.7.1
+
+# postgresql
+psycopg2==2.7.1
