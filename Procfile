@@ -1,1 +1,1 @@
-back: foreman start -d ./back -f ./back/Procfile.${DJANGO_SETTINGS_MODULE#back.settings.}
+back: django-admin runserver 0.0.0.0:8000
