@@ -1,2 +1,4 @@
 back/.env
 back/static
+*.sublime-project
+*.sublime-workspace
