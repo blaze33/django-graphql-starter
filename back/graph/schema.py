@@ -1,17 +1,37 @@
 import graphene
+import json
+import ast
 
 from graphene_django import DjangoObjectType
 from graphene_django.debug import DjangoDebug
-
 from .models import Node, Edge
 
 
+class JSONType(graphene.Scalar):
+    @staticmethod
+    def serialize(dt):
+        return dt
+
+    @staticmethod
+    def parse_literal(node):
+        if isinstance(node, ast.StringValue):
+            return json.loads(node.value)
+
+    @staticmethod
+    def parse_value(value):
+        return value
+
+
 class NodeType(DjangoObjectType):
+    data = graphene.Field(JSONType)
+
     class Meta:
         model = Node
 
 
 class EgdeType(DjangoObjectType):
+    data = graphene.Field(JSONType)
+
     class Meta:
         model = Edge
 
