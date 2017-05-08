@@ -5,6 +5,9 @@ django-extensions==1.7.9
 # https://github.com/kennethreitz/dj-database-url
 dj-database-url==0.4.2
 
+# static assets
+whitenoise==3.3.0
+
 # web server
 gunicorn==19.7.1
 
