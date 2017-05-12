@@ -37,12 +37,17 @@ class EgdeType(DjangoObjectType):
 
 
 class Query(graphene.ObjectType):
-    nodes = graphene.List(NodeType)
+    nodes = graphene.List(NodeType, id=graphene.Int(), contains=graphene.String())
     edges = graphene.List(EgdeType)
     debug = graphene.Field(DjangoDebug, name='__debug')
 
     def resolve_nodes(self, args, context, info):
-        return Node.objects.all()
+        queryset = Node.objects.all()
+        if 'id' in args:
+            queryset = queryset.filter(id=args['id'])
+        if 'contains' in args:
+            queryset = queryset.filter(data__contains=json.loads(args['contains']))
+        return queryset
 
     def resolve_edges(self, args, context, info):
         return Edge.objects.all()
